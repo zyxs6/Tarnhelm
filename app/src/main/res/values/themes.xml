@@ -40,6 +40,16 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="Theme.Tarnhelm.AppTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Tarnhelm.AppTheme.Dark" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="Theme.Tarnhelm.NoDisplay" parent="Theme.Tarnhelm">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

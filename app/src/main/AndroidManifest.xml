@@ -8,21 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tarnhelm">
+        android:theme="@style/Theme.Tarnhelm.AppTheme.Light">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.compose.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.rules.RulesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.process.ProcessEditTextActivity"
             android:exported="true"

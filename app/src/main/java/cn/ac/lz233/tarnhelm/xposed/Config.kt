@@ -4,6 +4,6 @@ import cn.ac.lz233.tarnhelm.BuildConfig
 
 object Config {
     const val packageName = BuildConfig.APPLICATION_ID
-    const val bridgeAction = "${BuildConfig.APPLICATION_ID}.bridge"
+    const val bridgeAction = "cn.ac.lz233.tarnhelm.bridge"
     lateinit var classLoader: ClassLoader
 }

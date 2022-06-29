@@ -15,6 +15,7 @@
     <string name="mainAboutTitle">About</string>
 
     <string name="aboutViewSourceCode"><![CDATA[View source code at %s]]></string>
+    <string name="aboutViewSourceCodeText">View source code at </string>
 
     <string name="rulesTitle">Rules</string>
     <string name="rulesAddFab">Add</string>
