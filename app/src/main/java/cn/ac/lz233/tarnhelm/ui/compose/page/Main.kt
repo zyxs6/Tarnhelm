@@ -206,34 +206,36 @@ object Main {
                                 style = MaterialTheme.typography.bodySmall
                             )
                             val annotatedText = buildAnnotatedString {
-                                append(stringResource(id = R.string.aboutViewSourceCodeText) + " ")
+                                withStyle(SpanStyle(MaterialTheme.colorScheme.onPrimaryContainer)) {
+                                    append(stringResource(id = R.string.aboutViewSourceCodeText) + " ")
+                                }
                                 pushStringAnnotation(
                                     tag = "openSourceCode",
                                     annotation = "openSourceCode"
                                 )
-                                withStyle(
-                                    style = SpanStyle(
-                                        color = Color(0xFF0E9FF2)
-                                    )
-                                ) {
+                                withStyle(SpanStyle(Color(0xFF0E9FF2))) {
                                     append("Github")
                                 }
                                 pop()
                             }
-                            ClickableText(text = annotatedText, onClick = { offset ->
-                                annotatedText.getStringAnnotations(
-                                    tag = "openSourceCode",
-                                    start = offset,
-                                    end = offset
-                                ).firstOrNull()?.let {
-                                    runCatching {
-                                        App.context.startActivity(
-                                            Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lz233/Tarnhelm"))
-                                                .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
-                                        )
+                            ClickableText(
+                                text = annotatedText,
+                                onClick = { offset ->
+                                    annotatedText.getStringAnnotations(
+                                        tag = "openSourceCode",
+                                        start = offset,
+                                        end = offset
+                                    ).firstOrNull()?.let {
+                                        runCatching {
+                                            App.context.startActivity(
+                                                Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lz233/Tarnhelm"))
+                                                    .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
+                                            )
+                                        }
                                     }
-                                }
-                            })
+                                },
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         }
                     }
                 },
