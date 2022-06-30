@@ -85,7 +85,9 @@ object Main {
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(
-                        text = stringResource(id = R.string.mainStatusPassSummary, modeText),
+                        text =
+                        if (anyModeActive) stringResource(id = R.string.mainStatusPassSummary, modeText)
+                        else stringResource(id = R.string.mainStatusErrorSummary),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }

@@ -11,14 +11,14 @@ class MainViewModel: ViewModel() {
 
     lateinit var navController: NavController
 
-    var modeEditTextMenu = mutableStateOf(false)
-    var modeSharingDialog = mutableStateOf(false)
-    var modeXposed = mutableStateOf(false)
-    val anyModeEnabled get() = modeEditTextMenu.value || modeSharingDialog.value || modeXposed.value
-    val workModeList get() = mutableListOf<String>().apply {
-        if (App.isEditTextMenuActive()) add(R.string.mainStatusWorkModeEditTextMenu.getString())
-        if (App.isShareActive()) add(R.string.mainStatusWorkModeShare.getString())
-        if (App.isXposedActive()) add(R.string.mainStatusWorkModeXposed.getString())
+    private val modeEditTextMenu get() = App.isEditTextMenuActive()
+    private val modeSharingDialog get() = App.isShareActive()
+    private val modeXposed get() = App.isXposedActive()
+    val anyModeEnabled get() = modeEditTextMenu or modeSharingDialog or modeXposed
+    private val workModeList get() = mutableListOf<String>().apply {
+        if (modeEditTextMenu) add(R.string.mainStatusWorkModeEditTextMenu.getString())
+        if (modeSharingDialog) add(R.string.mainStatusWorkModeShare.getString())
+        if (modeXposed) add(R.string.mainStatusWorkModeXposed.getString())
     }
 
     fun getActiveModeText(): String {

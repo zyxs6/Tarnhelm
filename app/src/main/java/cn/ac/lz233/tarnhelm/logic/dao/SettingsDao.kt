@@ -4,8 +4,8 @@ import cn.ac.lz233.tarnhelm.App
 
 object SettingsDao {
     val workModeEditTextMenu
-        get() = App.spSettings.getBoolean("workModeEditTextMenu", true)
+        get() = App.sp.getBoolean("workModeEditTextMenu", false)
 
     val workModeShare
-        get() = App.spSettings.getBoolean("workModeShare", true)
+        get() = App.sp.getBoolean("workModeShare", false)
 }

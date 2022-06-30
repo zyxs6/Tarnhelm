@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cn.ac.lz233.tarnhelm.App
 import cn.ac.lz233.tarnhelm.ui.compose.page.Main
+import cn.ac.lz233.tarnhelm.ui.compose.page.Settings
 import cn.ac.lz233.tarnhelm.ui.compose.theme.AppTheme
 import cn.ac.lz233.tarnhelm.ui.compose.theme.isLight
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -27,7 +28,6 @@ class MainActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        initWorkingMode()
         setContent {
             AppTheme {
                 val systemUiController = rememberSystemUiController()
@@ -44,16 +44,11 @@ class MainActivity: ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     NavHost(navController = navController, startDestination = "main") {
                         composable("main") { Main(viewModel) }
+                        composable("settings") { Settings(viewModel) }
                     }
                 }
             }
         }
-    }
-
-    private fun initWorkingMode() {
-        viewModel.modeEditTextMenu.value = App.isEditTextMenuActive()
-        viewModel.modeSharingDialog.value = App.isShareActive()
-        viewModel.modeXposed.value = App.isXposedActive()
     }
 
 }
