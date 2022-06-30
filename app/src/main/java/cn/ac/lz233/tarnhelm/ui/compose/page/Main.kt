@@ -29,7 +29,7 @@ import cn.ac.lz233.tarnhelm.ui.compose.MainViewModel
 
 @Composable
 fun Main(viewModel: MainViewModel) {
-    Column {
+    Column(modifier = Modifier.fillMaxSize()) {
         MediumTopAppBar(title = {
             Text(text = stringResource(id = R.string.app_name))
         })
@@ -131,7 +131,7 @@ object Main {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-
+                    viewModel.navController.navigate("settings")
                 },
             shape = MaterialTheme.shapes.medium
         ) {
