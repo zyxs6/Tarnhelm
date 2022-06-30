@@ -1,5 +1,7 @@
 package cn.ac.lz233.tarnhelm.ui.compose.page
 
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import cn.ac.lz233.tarnhelm.App
 import cn.ac.lz233.tarnhelm.R
 import cn.ac.lz233.tarnhelm.ui.compose.MainViewModel
+import cn.ac.lz233.tarnhelm.ui.process.ProcessEditTextActivity
+import cn.ac.lz233.tarnhelm.ui.process.ProcessShareActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -70,6 +74,7 @@ fun Settings(viewModel: MainViewModel) {
                                         onCheckedChange = { bool ->
                                             checkedState.value = bool
                                             App.editor.putBoolean(it.key, bool).apply()
+                                            it.callback(bool)
                                         }
                                     )
                                 }
@@ -87,11 +92,44 @@ fun Settings(viewModel: MainViewModel) {
 object Settings {
     abstract class SettingsItem
     data class SettingsTitle(val title: String) : SettingsItem()
-    data class SettingsSwitch(val title: String, val key: String): SettingsItem()
+    data class SettingsSwitch(val title: String, val key: String, val callback: (Boolean) -> Unit = {}): SettingsItem()
 
     val settingsItems = listOf(
         SettingsTitle(App.context.getString(R.string.settingsWorkModeTitle)),
-        SettingsSwitch(App.context.getString(R.string.settingsWorkModeEditTextMenu), "workModeEditTextMenu"),
-        SettingsSwitch(App.context.getString(R.string.settingsWorkModeShare), "workModeShare"),
+        SettingsSwitch(App.context.getString(R.string.settingsWorkModeEditTextMenu), "workModeEditTextMenu", ::onEditTextMenuSwitchChanged),
+        SettingsSwitch(App.context.getString(R.string.settingsWorkModeShare), "workModeShare", ::onShareSwitchChanged),
     )
+
+    private fun onEditTextMenuSwitchChanged(boolean: Boolean) {
+        if (boolean) {
+            App.context.packageManager.setComponentEnabledSetting(
+                ComponentName(App.context, ProcessEditTextActivity::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        } else {
+            App.context.packageManager.setComponentEnabledSetting(
+                ComponentName(App.context, ProcessEditTextActivity::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        }
+    }
+
+    private fun onShareSwitchChanged(boolean: Boolean) {
+        if (boolean) {
+            App.context.packageManager.setComponentEnabledSetting(
+                ComponentName(App.context, ProcessShareActivity::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        } else {
+            App.context.packageManager.setComponentEnabledSetting(
+                ComponentName(App.context, ProcessShareActivity::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        }
+    }
+
 }
