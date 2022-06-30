@@ -14,7 +14,6 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import cn.ac.lz233.tarnhelm.App
 import cn.ac.lz233.tarnhelm.ui.compose.page.Main
 import cn.ac.lz233.tarnhelm.ui.compose.page.Settings
 import cn.ac.lz233.tarnhelm.ui.compose.theme.AppTheme
